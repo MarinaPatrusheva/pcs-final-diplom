@@ -21,7 +21,7 @@ public class Main {
                     String search = in.readLine();
                     StringBuilder stringBuilder = new StringBuilder();
                     List<PageEntry> list = engine.search(search);
-                    for(int i = 0; i < list.size(); i++){
+                    for (int i = 0; i < list.size(); i++) {
                         stringBuilder.append(getJsonAnswer(list.get(i)));
                     }
                     out.println(stringBuilder.toString());
@@ -37,7 +37,8 @@ public class Main {
         // слушать он должен порт 8989
         // отвечать на запросы /{word} -> возвращённое значение метода search(word) в JSON-формате
     }
-    private static String getJsonAnswer(PageEntry pageEntry){
+
+    private static String getJsonAnswer(PageEntry pageEntry) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonPageEntry = gson.toJson(pageEntry);
         return jsonPageEntry;
