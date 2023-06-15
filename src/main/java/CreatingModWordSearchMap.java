@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreatingModWordSearchMap {
     private CreatingWordSearchMap searchMap;
@@ -13,13 +14,13 @@ public class CreatingModWordSearchMap {
         keys = searchMap.getKeys();
     }
 
-    public HashMap<String, List<PageEntry>> getModWordsCount() throws IOException {
+    public Map<String, List<PageEntry>> getModWordsCount() throws IOException {
         return setModWordsCount();
     }
 
-    private HashMap<String, List<PageEntry>> setModWordsCount() throws IOException {
-        HashMap<String, List<PageEntry>> modWordsCount = new HashMap<>();
-        HashMap<String, List<PageEntry>> wordsCount = searchMap.getWordsCount();
+    private Map<String, List<PageEntry>> setModWordsCount() throws IOException {
+        Map<String, List<PageEntry>> modWordsCount = new HashMap<>();
+        Map<String, List<PageEntry>> wordsCount = searchMap.getWordsCount();
         for (int i = 0; i < keys.size(); i++) {
             String word = keys.get(i);
             List<PageEntry> pageEntries = wordsCount.get(word);

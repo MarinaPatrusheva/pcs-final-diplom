@@ -1,14 +1,8 @@
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
-import com.itextpdf.kernel.pdf.PdfReader;
-import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
-
 import java.io.*;
-import java.nio.file.Files;
 import java.util.*;
 
 public class BooleanSearchEngine implements SearchEngine {
-    private HashMap<String, List<PageEntry>> wordsCount;
+    private Map<String, List<PageEntry>> wordsCount;
     private List<String> ignoreList;
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
@@ -20,7 +14,8 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        List<String> listWords = getSearchWithoutIgnoreWords(word);
+        String searchWord = word.toLowerCase();
+        List<String> listWords = getSearchWithoutIgnoreWords(searchWord);
         List<PageEntry> pageEntriesMod = new ArrayList<>();
         for (int i = 0; i < listWords.size(); i++) {
             if (wordsCount.containsKey((listWords.get(i)))) {

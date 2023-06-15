@@ -11,7 +11,7 @@ public class testClient {
             Socket socket = new Socket("127.0.0.1", 8989);
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream());
-            out.println("блокчейн технология");
+            out.println("Блокчейн Технология");
             out.flush();
             String txt = "";
             while (txt != null) {

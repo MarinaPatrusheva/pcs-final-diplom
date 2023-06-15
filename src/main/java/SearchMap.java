@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchMap {
     private File fileDirectory;
@@ -10,7 +11,7 @@ public class SearchMap {
         this.fileDirectory = fileDirectory;
     }
 
-    public HashMap<String, List<PageEntry>> getSearchMap() {
+    public Map<String, List<PageEntry>> getSearchMap() {
         CreatingWordSearchMap searchMap = new CreatingWordSearchMap(fileDirectory);
         try {
             return searchMap.getWordsCount();
@@ -19,7 +20,7 @@ public class SearchMap {
         }
     }
 
-    public HashMap<String, List<PageEntry>> getModSearchMap() {
+    public Map<String, List<PageEntry>> getModSearchMap() {
         CreatingModWordSearchMap searchMap = new CreatingModWordSearchMap(fileDirectory);
         try {
             return searchMap.getModWordsCount();

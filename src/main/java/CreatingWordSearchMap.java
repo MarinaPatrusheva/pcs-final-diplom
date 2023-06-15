@@ -8,9 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CreatingWordSearchMap {
-    private HashMap<String, List<PageEntry>> wordsCount = new HashMap<>();
+    private Map<String, List<PageEntry>> wordsCount = new HashMap<>();
     private File[] files;
     private List<String> keys = new ArrayList<>();
 
@@ -18,7 +19,7 @@ public class CreatingWordSearchMap {
         setFileDirectory(fileDirectory);
     }
 
-    public HashMap<String, List<PageEntry>> getWordsCount() throws IOException {
+    public Map<String, List<PageEntry>> getWordsCount() throws IOException {
         setWordsFromPdfToMap();
         return wordsCount;
     }
@@ -34,12 +35,12 @@ public class CreatingWordSearchMap {
         }
     }
 
-    private HashMap<String, List<PageEntry>> getMapPageEntryFromDocument(PdfDocument pdfDocument, String name) {
-        HashMap<String, List<PageEntry>> pageEntryHashMap = new HashMap<>();
+    private Map<String, List<PageEntry>> getMapPageEntryFromDocument(PdfDocument pdfDocument, String name) {
+        Map<String, List<PageEntry>> pageEntryHashMap = new HashMap<>();
         int numberPages = pdfDocument.getNumberOfPages();
         for (int i = 0; i < numberPages; i++) {
             PdfPage page = pdfDocument.getPage(i + 1);
-            HashMap<String, Integer> countWordsInPage = getCountWordsFromPage(page);
+            Map<String, Integer> countWordsInPage = getCountWordsFromPage(page);
             List<String> keys = getKeyPage(page);
             for (int j = 0; j < countWordsInPage.size(); j++) {
                 String word = keys.get(j);
@@ -57,9 +58,9 @@ public class CreatingWordSearchMap {
         return pageEntryHashMap;
     }
 
-    private HashMap<String, Integer> getCountWordsFromPage(PdfPage page) {
+    private Map<String, Integer> getCountWordsFromPage(PdfPage page) {
         String[] textPageArray = getTextPage(page);
-        HashMap<String, Integer> mapWordsCount = new HashMap<>();
+        Map<String, Integer> mapWordsCount = new HashMap<>();
         for (int i = 0; i < textPageArray.length; i++) {
             String word = textPageArray[i];
             addKey(word);
@@ -72,7 +73,7 @@ public class CreatingWordSearchMap {
         return mapWordsCount;
     }
 
-    private void putMap(HashMap<String, List<PageEntry>> map) {
+    private void putMap(Map<String, List<PageEntry>> map) {
         for (int i = 0; i < keys.size(); i++) {
             String word = keys.get(i);
             if (wordsCount.containsKey(word) & map.containsKey(word)) {

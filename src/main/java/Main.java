@@ -1,7 +1,9 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -19,12 +21,8 @@ public class Main {
                         PrintWriter out = new PrintWriter(socket.getOutputStream());
                 ) {
                     String search = in.readLine();
-                    StringBuilder stringBuilder = new StringBuilder();
                     List<PageEntry> list = engine.search(search);
-                    for (int i = 0; i < list.size(); i++) {
-                        stringBuilder.append(getJsonAnswer(list.get(i)));
-                    }
-                    out.println(stringBuilder.toString());
+                    out.println(getJsonAnswer(list));
                     out.flush();
                 }
             }
@@ -38,9 +36,9 @@ public class Main {
         // отвечать на запросы /{word} -> возвращённое значение метода search(word) в JSON-формате
     }
 
-    private static String getJsonAnswer(PageEntry pageEntry) {
+    private static String getJsonAnswer(List<PageEntry> pageEntries) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonPageEntry = gson.toJson(pageEntry);
+        String jsonPageEntry = gson.toJson(pageEntries);
         return jsonPageEntry;
     }
 }
